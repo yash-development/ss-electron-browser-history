@@ -1,0 +1,1 @@
+# ss-electron-browser-history
