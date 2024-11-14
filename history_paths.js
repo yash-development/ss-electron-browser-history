@@ -35,7 +35,14 @@ function setupForMac() {
 
 function setupForLinux() {
     let defaultPaths = {}
-    defaultPaths.firefox = Path.join(homeDirectory, ".mozilla", "firefox");
+    const snapFirefoxPath = Path.join(homeDirectory, "snap", "firefox", "common", ".mozilla", "firefox");
+    if (require('fs').existsSync(snapFirefoxPath)) {
+        // If Snap version of Firefox exists, use the Snap path
+        defaultPaths.firefox = snapFirefoxPath;
+    } else {
+        // Fallback to traditional Firefox path
+        defaultPaths.firefox = Path.join(homeDirectory, ".mozilla", "firefox");
+    }
     defaultPaths.chrome = Path.join(homeDirectory, ".config", "google-chrome");
     return defaultPaths
 }
